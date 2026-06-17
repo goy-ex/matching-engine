@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
+	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
 	"github.com/google/uuid"
 	"github.com/shopspring/decimal"
 )
@@ -32,7 +33,7 @@ func NewOrder(
 	createdAt time.Time,
 ) (*Order, error) {
 	if !side.IsValid() {
-		return nil, &errors.InvalidSideError{Has: string(side)}
+		return nil, sentinel.BadRequest(&errors.InvalidSideError{Has: string(side)})
 	}
 
 	return &Order{

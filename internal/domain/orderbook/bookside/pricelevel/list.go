@@ -7,7 +7,7 @@ import (
 	"container/list"
 
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
+	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
 )
 
 type ListPriceLevel struct {
@@ -24,7 +24,7 @@ func (pl *ListPriceLevel) Front() *domain.Order {
 
 	order, ok := front.Value.(*domain.Order)
 	if !ok {
-		panic(errors.InvariantViolation(&InvalidPriceLevelElement{Has: front.Value}))
+		panic(sentinel.InvariantViolation(&InvalidPriceLevelElement{Has: front.Value}))
 	}
 
 	return order
@@ -33,7 +33,7 @@ func (pl *ListPriceLevel) Front() *domain.Order {
 func (pl *ListPriceLevel) RemoveFront() {
 	front := pl.orders.Front()
 	if front == nil {
-		panic(errors.InvariantViolation(ErrRemoveFrontFromEmptyPriceLevel))
+		panic(sentinel.InvariantViolation(ErrRemoveFrontFromEmptyPriceLevel))
 	}
 
 	pl.orders.Remove(front)

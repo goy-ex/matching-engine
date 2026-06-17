@@ -2,7 +2,7 @@ package pricelevel
 
 import (
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
+	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
 )
 
 const minCap = 10
@@ -31,12 +31,13 @@ func (pl *RingPriceLevel) Front() *domain.Order {
 	if pl.len == 0 {
 		return nil
 	}
+
 	return pl.buf[pl.head]
 }
 
 func (pl *RingPriceLevel) RemoveFront() {
 	if pl.len == 0 {
-		panic(errors.InvariantViolation(ErrRemoveFrontFromEmptyPriceLevel))
+		panic(sentinel.InvariantViolation(ErrRemoveFrontFromEmptyPriceLevel))
 	}
 
 	pl.buf[pl.head] = nil

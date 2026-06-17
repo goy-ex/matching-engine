@@ -2,6 +2,7 @@ package orderbook
 
 import (
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
+	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
 
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain/orderbook/bookside"
@@ -82,7 +83,7 @@ func (ob *OrderBook) oppositeSide(side domain.Side) BookSide {
 	case domain.SideAsk:
 		return ob.Bids
 	default:
-		panic(&errors.InvalidSideError{Has: string(side)})
+		panic(sentinel.InvariantViolation(&errors.InvalidSideError{Has: string(side)}))
 	}
 }
 
@@ -93,10 +94,11 @@ func pricesCross(taker, maker *domain.Order) bool {
 	case domain.SideAsk:
 		return taker.Price.LessThanOrEqual(maker.Price)
 	default:
-		panic(&errors.InvalidSideError{Has: string(taker.Side)})
+		panic(sentinel.InvariantViolation(&errors.InvalidSideError{Has: string(taker.Side)}))
 	}
 }
 
+//nolint:gocritic // ...
 func resolveBidAsk(taker, maker *domain.Order) (uuid.UUID, uuid.UUID) {
 	switch taker.Side {
 	case domain.SideBid:
@@ -104,6 +106,6 @@ func resolveBidAsk(taker, maker *domain.Order) (uuid.UUID, uuid.UUID) {
 	case domain.SideAsk:
 		return maker.ID, taker.ID
 	default:
-		panic(&errors.InvalidSideError{Has: string(taker.Side)})
+		panic(sentinel.InvariantViolation(&errors.InvalidSideError{Has: string(taker.Side)}))
 	}
 }

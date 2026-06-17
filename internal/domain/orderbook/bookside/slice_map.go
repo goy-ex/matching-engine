@@ -4,8 +4,8 @@ import (
 	"sort"
 
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
 	"github.com/akhmy/goy-ex-matching-engine/internal/domain/orderbook/bookside/pricelevel"
+	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
 	"github.com/shopspring/decimal"
 )
 
@@ -49,7 +49,7 @@ func (bs *SortedSliceBookSide) GetBestOrder() (*domain.Order, bool) {
 
 	level, exists := bs.levels[bs.prices[0].String()]
 	if !exists {
-		panic(errors.InvariantViolation(ErrNoBestLevel))
+		panic(sentinel.InvariantViolation(ErrNoBestLevel))
 	}
 
 	return level.Front(), true
@@ -61,17 +61,17 @@ func (bs *SortedSliceBookSide) GetBestOrder() (*domain.Order, bool) {
 // on an empty book side.
 func (bs *SortedSliceBookSide) ReduceBestOrder(amount decimal.Decimal) {
 	if len(bs.prices) == 0 {
-		panic(errors.InvariantViolation(ErrReduceBestOrderOnEmptyBookSide))
+		panic(sentinel.InvariantViolation(ErrReduceBestOrderOnEmptyBookSide))
 	}
 
 	level, exists := bs.levels[bs.prices[0].String()]
 	if !exists {
-		panic(errors.InvariantViolation(ErrReduceBestOrderOnEmptyBookSide))
+		panic(sentinel.InvariantViolation(ErrReduceBestOrderOnEmptyBookSide))
 	}
 
 	order := level.Front()
 	if order == nil {
-		panic(errors.InvariantViolation(ErrNoFront))
+		panic(sentinel.InvariantViolation(ErrNoFront))
 	}
 
 	order.Remaining = order.Remaining.Sub(amount)

@@ -1,16 +1,23 @@
 package domain
 
-import "github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
+import (
+	"strconv"
+
+	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
+	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
+)
 
 // Side indicates which half of the order book an order belongs to.
 type Side byte
 
 const (
-	SideBid Side = iota // buyer side: orders to purchase at or above a given price
-	SideAsk             // seller side: orders to sell at or below a given price
+	// SideBid stands for buyer side: orders to purchase at or above a given price.
+	SideBid Side = iota
+	// SideAsk stands for seller side: orders to sell at or below a given price.
+	SideAsk
 )
 
-// IsValid reports whether s is a recognised Side value.
+// IsValid reports whether s is a recognized Side value.
 func (s Side) IsValid() bool {
 	switch s {
 	case SideBid, SideAsk:
@@ -29,6 +36,17 @@ func (s Side) Opposite() Side {
 	case SideAsk:
 		return SideBid
 	default:
-		panic(&errors.InvalidSideError{Has: string(s)})
+		panic(sentinel.InvariantViolation(&errors.InvalidSideError{Has: string(s)}))
+	}
+}
+
+func (s Side) String() string {
+	switch s {
+	case SideBid:
+		return "bid"
+	case SideAsk:
+		return "ask"
+	default:
+		return strconv.Itoa(int(s))
 	}
 }
