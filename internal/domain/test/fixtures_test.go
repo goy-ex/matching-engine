@@ -3,8 +3,8 @@ package domain_test
 import (
 	"time"
 
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
 	"github.com/google/uuid"
+	"github.com/goy-ex/matching-engine/internal/domain"
 	"github.com/shopspring/decimal"
 )
 

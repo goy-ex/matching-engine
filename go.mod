@@ -1,4 +1,4 @@
-module github.com/akhmy/goy-ex-matching-engine
+module github.com/goy-ex/matching-engine
 
 go 1.26.1
 

@@ -1,12 +1,12 @@
 package orderbook
 
 import (
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
-	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
+	"github.com/goy-ex/matching-engine/internal/domain"
+	"github.com/goy-ex/matching-engine/internal/pkg/sentinel"
 
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/orderbook/bookside"
 	"github.com/google/uuid"
+	"github.com/goy-ex/matching-engine/internal/domain/errors"
+	"github.com/goy-ex/matching-engine/internal/domain/orderbook/bookside"
 	"github.com/shopspring/decimal"
 )
 

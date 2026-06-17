@@ -3,9 +3,9 @@ package domain
 import (
 	"time"
 
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
-	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
 	"github.com/google/uuid"
+	"github.com/goy-ex/matching-engine/internal/domain/errors"
+	"github.com/goy-ex/matching-engine/internal/pkg/sentinel"
 	"github.com/shopspring/decimal"
 )
 

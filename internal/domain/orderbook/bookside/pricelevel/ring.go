@@ -1,8 +1,8 @@
 package pricelevel
 
 import (
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain"
-	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
+	"github.com/goy-ex/matching-engine/internal/domain"
+	"github.com/goy-ex/matching-engine/internal/pkg/sentinel"
 )
 
 const minCap = 10
