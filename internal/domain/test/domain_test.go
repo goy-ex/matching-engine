@@ -4,7 +4,7 @@ import (
 	"math/rand/v2"
 	"testing"
 
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/orderbook"
+	"github.com/goy-ex/matching-engine/internal/domain/orderbook"
 )
 
 func TestPriceLevels(t *testing.T) {

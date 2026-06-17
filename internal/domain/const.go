@@ -3,8 +3,8 @@ package domain
 import (
 	"strconv"
 
-	"github.com/akhmy/goy-ex-matching-engine/internal/domain/errors"
-	"github.com/akhmy/goy-ex-matching-engine/internal/pkg/sentinel"
+	"github.com/goy-ex/matching-engine/internal/domain/errors"
+	"github.com/goy-ex/matching-engine/internal/pkg/sentinel"
 )
 
 // Side indicates which half of the order book an order belongs to.
