@@ -36,6 +36,18 @@ func NewOrder(
 		return nil, sentinel.BadRequest(&errors.InvalidSideError{Has: string(side)})
 	}
 
+	if price.LessThan(decimal.Zero) {
+		return nil, sentinel.BadRequest(&errors.NegativeValueError{Field: "price", Has: price.String()})
+	}
+
+	if amount.LessThan(decimal.Zero) {
+		return nil, sentinel.BadRequest(&errors.NegativeValueError{Field: "amount", Has: amount.String()})
+	}
+
+	if remaining.LessThan(decimal.Zero) {
+		return nil, sentinel.BadRequest(&errors.NegativeValueError{Field: "remaining", Has: remaining.String()})
+	}
+
 	return &Order{
 		ID:        id,
 		UserID:    userID,
