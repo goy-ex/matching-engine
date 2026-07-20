@@ -5,7 +5,7 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/goy-ex/matching-engine/internal/domain/errors"
-	"github.com/goy-ex/matching-engine/internal/pkg/sentinel"
+	"github.com/goy-ex/matching-engine/pkg/sentinel"
 	"github.com/shopspring/decimal"
 )
 
