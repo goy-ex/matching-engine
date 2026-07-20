@@ -7,12 +7,19 @@ import (
 	"container/list"
 
 	"github.com/goy-ex/matching-engine/internal/domain"
-	"github.com/goy-ex/matching-engine/internal/pkg/sentinel"
+	"github.com/goy-ex/matching-engine/pkg/sentinel"
 )
 
 type ListPriceLevel struct {
 	orders *list.List
 	len    int
+}
+
+func NewListPriceLevel() *ListPriceLevel {
+	return &ListPriceLevel{
+		orders: list.New(),
+		len:    0,
+	}
 }
 
 // Front returns the first order in the level and panics if the stored value is not *domain.Order.
